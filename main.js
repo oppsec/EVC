@@ -24,34 +24,31 @@ function clearTerminal() {
 }
 
 
-function Menu() {
+const Menu = () => {
     clearTerminal();
     console.log(chalk.greenBright(evcAscii));
     getFileName();
 }
 
 
-function getFileName() {
+const getFileName = () => {
+
     console.log(chalk.yellowBright("[!] - The executable needs to be in the same folder"));
+
+    const nonExistentExecutable = "[X] - The executable specified don't exist";
 
     rl.question("[?] - File name: ", (fileName) => {
 
-        if(fs.existsSync(fileName)) {
-            console.log(chalk.greenBright("\n[!] - Executable found, let's verify."));
-            getEntryPoint(fileName);
-            rl.close();
-        } else {
-            console.log(chalk.redBright("\n[X] - The executable specified don't exist"));
-            rl.close();
-            setTimeout(Menu, 2000); // Wait 2 seconds and come back to Menu
-        }
-
+        fs.existsSync(fileName) ? getEntryPoint(fileName)
+                                : console.log(chalk.redBright(`\n${nonExistentExecutable}`)); setTimeout(Menu, 2000);
     })
 }
 
 
-function getEntryPoint(fileName) {
-    
+const getEntryPoint = (fileName) => {
+
+    console.log(chalk.greenBright("\n[!] - Executable found, let's verify."));
+
     const fileNamePath = path.join(`${__dirname}/${fileName}`);
     const readFile = fs.createReadStream(fileNamePath);
 
@@ -64,22 +61,19 @@ function getEntryPoint(fileName) {
             console.log('[#] - Executable entrypoint: ' + fileEntrypoint);
             verifyEntrypoint(fileEntrypoint);
 
-        })      
+        })
         .then(() => ep.close(), () => ep.close())
         .catch(console.error)
 }
 
 
-function verifyEntrypoint(fileEntrypoint) {
+const verifyEntrypoint = (fileEntrypoint) => {
 
     const entryPointData = fs.readFileSync('data.txt', 'utf-8');
     const dataSplit = entryPointData.toString().split("\n").join("\t").split("\t").join("\r").split("\r");
 
-    if((dataSplit).some(value => value === fileEntrypoint)) {
-        console.log(chalk.redBright('\n[X] - Probably infected executable'));
-    } else {
-        console.log(chalk.greenBright('\n[!] - Secure executable.'));
-    }
+    dataSplit.some(val => val === fileEntrypoint) ? console.log(chalk.redBright('\n[X] - Probably infected executable')) && rl.close()
+                                                  : console.log(chalk.greenBright('\n[!] - Secure executable.'));
 
 }
 
