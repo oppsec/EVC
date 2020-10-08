@@ -10,7 +10,7 @@
 <br><br>
 
 ## 🤔 What is EVC?
-EVC or Executable Virus Checker is a JS CLI which checks executable entrypoint.
+EVC or Executable Virus Checker is a JavaScript CLI which checks executable entrypoint.
 
 <br><br>
 
@@ -28,6 +28,10 @@ EVC or Executable Virus Checker is a JS CLI which checks executable entrypoint.
 4. Done! 😃
 
 <br><br>
+
+## 🐛 Entrypoints
+- Wannacry, Artemis, Cerber
+- Unnamed_0, Wannacry Plus
 
 ## 📚 License
 - MIT License
