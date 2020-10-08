@@ -1,4 +1,4 @@
-# 🦠😷 EVC
+# 🐛 EVC
 
 <img src="https://i.imgur.com/xjcY7RR.png" width="800">
 
