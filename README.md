@@ -31,7 +31,8 @@ EVC or Executable Virus Checker is a JavaScript CLI which checks executable entr
 
 ## 🐛 Entrypoints
 - Wannacry, Artemis, Cerber
-- Unnamed_0, Wannacry Plus
+- Unnamed_0, Wannacry Plus, WannaPeace
+- LuckyCat, njRAT, MyLobot...
 
 <br><br>
 
